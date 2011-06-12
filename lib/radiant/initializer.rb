@@ -143,20 +143,7 @@ end_error
         require "#{RADIANT_ROOT}/lib/radiant/gem_dependency_fix"
         libs = %W{ 
           #{RADIANT_ROOT}/vendor/radius/lib
-          #{RADIANT_ROOT}/vendor/highline/lib
-          #{RADIANT_ROOT}/vendor/rack-cache/lib
         }
-        begin
-          Object.send :gem, 'RedCloth', ">=4.0.0"
-          require 'redcloth'
-        rescue LoadError, Gem::LoadError
-          # If the gem is not available, use the packaged version
-          libs << "#{RADIANT_ROOT}/vendor/redcloth/lib"
-          after_initialize do
-            warn "RedCloth > 4.0 not found.  Falling back to RedCloth 3.0.4 (2005-09-15).  You should run `gem install RedCloth`."
-            require 'redcloth'
-          end
-        end
         libs
       end
 
